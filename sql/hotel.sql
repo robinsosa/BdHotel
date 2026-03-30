@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-03-2026 a las 07:27:27
+-- Tiempo de generación: 30-03-2026 a las 20:39:46
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -41,7 +41,10 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id`, `nombre`, `apellido`, `dni`, `telefono`, `correo`) VALUES
-(1, 'Robin', 'sosa covenas', '61026687', '970462805', 'robinsosa180@gmail.com');
+(1, 'Robin', 'sosa covenas', '61026687', '970462805', 'robinsosa180@gmail.com'),
+(2, 'Lenna', 'Santos', '62589635', '985362147', 'lennasantos152@gmail.com'),
+(3, 'Julio', 'olivaes', '62587458', '987456321', 'yulionoliva186@gmil.com'),
+(4, 'Jerson ', 'Pasache', '69874521', '987456312', 'pasache785@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -61,7 +64,12 @@ CREATE TABLE `habitaciones` (
 --
 
 INSERT INTO `habitaciones` (`id`, `tipo`, `piso`, `numero`) VALUES
-(1, 'pareja', 5, 15);
+(1, 'pareja', 5, 15),
+(2, 'madrimonio', 3, 12),
+(3, 'madrimonial', 2, 7),
+(6, 'pareja', 4, 22),
+(7, 'Pareja', 1, 1),
+(8, 'madrimonial', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -82,7 +90,12 @@ CREATE TABLE `pagos` (
 --
 
 INSERT INTO `pagos` (`id`, `id_reserva`, `tipo`, `fecha`, `monto`) VALUES
-(1, 1, 'Yape', '2026-03-30', 480.00);
+(1, 1, 'Yape', '2026-03-30', 480.00),
+(2, 2, 'Transferencia', '2026-03-30', 480.00),
+(3, 3, 'Efectivo', '2026-03-30', 1080.00),
+(4, 4, 'Yape', '2026-03-30', 120.00),
+(5, 5, 'BBVA', '2026-03-30', 120.00),
+(6, 6, 'BBVA', '2026-03-30', 240.00);
 
 -- --------------------------------------------------------
 
@@ -104,7 +117,12 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`id`, `id_cliente`, `id_habitacion`, `fecha_reserva`, `fecha_ingreso`, `fecha_salida`) VALUES
-(1, 1, 1, '2026-03-30', '2026-04-02', '2026-04-06');
+(1, 1, 1, '2026-03-30', '2026-04-02', '2026-04-06'),
+(2, 2, 2, '2026-03-30', '2026-03-31', '2026-04-04'),
+(3, 3, 3, '2026-03-30', '2026-04-01', '2026-04-10'),
+(4, 3, 6, '2026-03-30', '2026-05-06', '2026-05-07'),
+(5, 4, 7, '2026-03-30', '2026-03-31', '2026-04-01'),
+(6, 4, 8, '2026-03-30', '2026-04-02', '2026-04-04');
 
 -- --------------------------------------------------------
 
@@ -128,7 +146,10 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `usuario`, `password`, `nombre`, `estado`, `id_cliente`) VALUES
 (1, 'admin', 'admin123', 'Administrador', 1, NULL),
 (2, 'gerente', 'gerente123', 'María García', 1, NULL),
-(3, 'robinsosa', 'robin123', 'Robin sosa covenas', 1, 1);
+(3, 'robinsosa', 'robin123', 'Robin sosa covenas', 1, 1),
+(4, 'lenna', 'lenna123', 'Lenna Santos', 1, 2),
+(5, 'yulion', 'yulion123', 'Julio olivaes', 1, 3),
+(6, 'pasache', 'pasache123', 'Jerson  Pasache', 1, 4);
 
 --
 -- Índices para tablas volcadas
@@ -179,31 +200,31 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `habitaciones`
 --
 ALTER TABLE `habitaciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `pagos`
 --
 ALTER TABLE `pagos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
