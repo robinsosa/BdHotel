@@ -1,5 +1,6 @@
 package Login;
 import Conexion.Conexion;
+import Menu.Datos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class login extends javax.swing.JFrame {
+    public static int idUsuarioActual = 0;
+    public static String rolUsuario   = "";
+    public static String nombreUsuario = "";
     public login() {
         initComponents();
         this.setLocationRelativeTo(this);
@@ -73,8 +77,9 @@ public class login extends javax.swing.JFrame {
 
     private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloginActionPerformed
         // TODO add your handling code here:
+        
         String usuario  = jtxtusername.getText();
-    String password = jtxtpassword.getText();
+        String password = jtxtpassword.getText();
     
     if (usuario.isEmpty() || password.isEmpty()) {
         JOptionPane.showMessageDialog(null, "Algún campo está vacío");
@@ -93,20 +98,30 @@ public class login extends javax.swing.JFrame {
         ResultSet rs = ps.executeQuery();
         
         if (rs.next()) {
-            // Usuario
-            String nombre = rs.getString("nombre");
-            JOptionPane.showMessageDialog(null, "Bienvenido " + nombre);
-            
+    
+        //Guardar datos
+        login.nombreUsuario = rs.getString("nombre");
+    
+        // Es admin o cliente?
+        if (rs.getObject("id_cliente") == null) {
+        login.rolUsuario      = "admin";
+        login.idUsuarioActual = rs.getInt("id");
         } else {
-            // No existe 
-            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
-            JOptionPane.showMessageDialog(null, "RESERVAR");
-            
+            login.rolUsuario      = "cliente";
+            login.idUsuarioActual = rs.getInt("id_cliente");
+        }
+
+        JOptionPane.showMessageDialog(null, "Bienvenido " + login.nombreUsuario);
+        Datos dat = new Datos();
+        dat.setVisible(true);
+        this.dispose();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "No tienes cuenta, por favor regístrate");
             Menu me = new Menu();
             me.setVisible(true);
             this.dispose();
         }
-        
         con.close(); 
         
     } catch (Exception e) {
